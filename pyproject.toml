@@ -1,0 +1,55 @@
+[project]
+name = "bioprompt"
+version = "0.1.0"
+description = "Leverage an LLM-powered biology toolchain to speed up research"
+authors = [
+    {name = "Taylor Neely", email = "tneely417@gmail.com"},
+]
+dependencies = [
+    "marvin>=1.5.1",
+]
+requires-python = ">=3.11"
+readme = "README.md"
+license = {text = "MIT"}
+
+[build-system]
+requires = ["pdm-backend"]
+build-backend = "pdm.backend"
+
+[tool.pdm.scripts]
+lint = "pre-commit run --all-files"
+test = "pdm run pytest"
+
+[tool.pdm.dev-dependencies]
+test = [
+    "pytest>=7.4.2",
+    "pytest-cov>=4.1.0",
+]
+
+[tool.black]
+line-length = 120
+target-version = ["py311"]
+
+[tool.ruff]
+line-length = 120
+extend-select = [
+    "I",    # isort
+    "B",    # flake8-bugbear
+    "C4",   # flake8-comprehensions
+    "PGH",  # pygrep-hooks
+    "RUF",  # ruff
+    "W",    # pycodestyle
+    "YTT",  # flake8-2020
+]
+src = ["src"]
+target-version = "py311"
+
+[tool.ruff.mccabe]
+max-complexity = 10
+
+
+[tool.pytest.ini_options]
+addopts = "-r aR"
+testpaths = [
+    "tests/",
+]
